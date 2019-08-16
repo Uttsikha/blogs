@@ -6,10 +6,9 @@ class User extends Model {
 
 	public $id;
 	public $name;
-	public $nick_name;
 	public $joined_date;
 	public $email_id;
-	public $profile_picture;
+	public $password;
 
 
 	public function __construct() 
@@ -43,17 +42,16 @@ class User extends Model {
 
 	function readUser()
 	{
-	    $statetment = $this->conn->prepare('SELECT * FROM users WHERE id = ? LIMIT 0,1');
-	    $statetment->bindParam(1, $this->id);
+	    $statetment = $this->conn->prepare('SELECT * FROM users WHERE name = ? LIMIT 0,1');
+	    $statetment->bindParam(1, $this->name);
 	    $statetment->execute();
 	 
 	    $row = $statetment->fetch(PDO::FETCH_ASSOC);
 	 
 	    $this->id = $row['id'];
 	    $this->name = $row['name'];
-	    $this->nick_name = $row['nick_name'];
 	    $this->joined_date = $row['joined_date'];
 	    $this->email_id = $row['email_id'];  
-	    $this->profile_picture = $row['profile_picture'];  
+	    $this->password = $row['password'];  
 	}
 }

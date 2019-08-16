@@ -6,10 +6,6 @@
 
 	$target_dir = "uploads/";
 	
-
-	
-
-	
 	if($_POST){
 		if ($_FILES["photo"]["size"] > 300000) {
 		    echo "  <a href='index.php'>
@@ -36,9 +32,6 @@
    			 </a>	
 	        <div class='alert'>Product was created.</div>";
 	    }
-
-	 
-	    // if unable to create the product, tell the user
 	    else{
 	    	echo "
 	        <a href='index.php'>

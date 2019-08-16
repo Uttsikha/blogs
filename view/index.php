@@ -23,9 +23,8 @@
 		<tr>
 			<th>ID</th>
 			<th>Name</th>
-			<th>Nick Name</th>
 			<th>Email ID</th>
-			<th>Profile Picture</th>
+			<th>Password</th>
 			<th>Joined Date</th>
 			
 		</tr>
@@ -34,9 +33,8 @@
 			foreach($users as $user) {
 				echo "<td> $user[id]</td>";
 				echo "<td> $user[name]</td>";
-				echo "<td> $user[nick_name]</td>";
 				echo "<td> $user[email_id]</td>";
-				echo "<td> $user[profile_picture]</td>";
+				echo "<td> $user[password]</td>";
 				echo "<td> $user[joined_date]</td>";
 					
 			}
