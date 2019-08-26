@@ -1,7 +1,7 @@
 <?php
 	
-	 include '../app/QueryBuilders/users.php';
-	include '../app/QueryBuilders/blogs.php';
+	//  include '../app/QueryBuilders/users.php';
+	// include '../app/QueryBuilders/blogs.php';
 
 
 	 $user = new User();
@@ -28,18 +28,19 @@
 			<th>Joined Date</th>
 			
 		</tr>
-		<tr>
-			<?php
-			foreach($users as $user) {
+		<?php
+		foreach($users as $user) {
+			echo "<tr>";
+	
 				echo "<td> $user[id]</td>";
-				echo "<td> $user[name]</td>";
+				echo "<td> $user[username]</td>";
 				echo "<td> $user[email_id]</td>";
 				echo "<td> $user[password]</td>";
 				echo "<td> $user[joined_date]</td>";
 					
-			}
-			?>
-		</tr>
+		
+			echo "</tr>";
+		} ?>
 	</table> 
 	<div><a href="createBlog.php">Create a Blog</a></div>
 	 <table border="1">

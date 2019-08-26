@@ -1,11 +1,13 @@
 <?php
 
+namespace "app\QueryBuilders";
+
 require_once '../app/model.php';
 
 class User extends Model {
 
 	public $id;
-	public $name;
+	public $username;
 	public $joined_date;
 	public $email_id;
 	public $password;
@@ -39,17 +41,39 @@ class User extends Model {
 	    }
 	}
 
-
+	function createUser(){
+ 
+	    $statement = $this->connection->prepare('INSERT INTO users
+	    	SET username=:username, email_id=:email_id, password=:password');
+	  
+      
+        $this->username=htmlspecialchars(strip_tags($this->username));
+        $this->email_id=htmlspecialchars(strip_tags($this->email_id));
+        $this->password=htmlspecialchars(strip_tags($this->password));
+        
+        $statement->bindParam(":username", $this->username);
+        $statement->bindParam(":email_id", $this->email_id);
+        $statement->bindParam(":password", $this->password);
+       
+     if($statement->execute()){
+            return true;
+        }else{
+            return false;
+        }
+ 
+	}
+ 
+    
 	function readUser()
 	{
-	    $statetment = $this->conn->prepare('SELECT * FROM users WHERE name = ? LIMIT 0,1');
-	    $statetment->bindParam(1, $this->name);
+	    $statetment = $this->connection->prepare('SELECT * FROM users WHERE email_id = ? LIMIT 0,1');
+	    $statetment->bindParam(1, $this->username);
 	    $statetment->execute();
 	 
 	    $row = $statetment->fetch(PDO::FETCH_ASSOC);
 	 
 	    $this->id = $row['id'];
-	    $this->name = $row['name'];
+	    $this->username = $row['username'];
 	    $this->joined_date = $row['joined_date'];
 	    $this->email_id = $row['email_id'];  
 	    $this->password = $row['password'];  
