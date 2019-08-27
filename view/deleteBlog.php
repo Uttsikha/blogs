@@ -1,16 +1,17 @@
 <?php
-
-include '../app/QueryBuilders/blogs.php';
+require '../vendor/autoload.php';
+// include '../app/QueryBuilders/blogs.php';
+ use App\QueryBuilders\Blog;
 
 $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
 
 
-$blog = new Blog();
+$blog = new App\QueryBuilders\Blog();
 $blog->id=$id;
 
  if($blog->deleteBlog()){
 
-        echo "<a href='index.php' class='btn'> Go to Home</a>";
+        echo "<a href='home.php' class='btn'> Go to Home</a><br>";
         echo "Object was deleted.";
     }
      

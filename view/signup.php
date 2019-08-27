@@ -31,7 +31,7 @@
   	</tr>
 	  </table>
   	<p>
-  		Already a member? <a href="loginPage.php">Sign in</a>
+  		Already a member? <a href="index.php">Sign in</a>
   	</p>
   </form>
 </body>

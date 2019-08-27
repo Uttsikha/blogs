@@ -1,16 +1,16 @@
 <?php
-
-	include '../app/QueryBuilders/blogs.php';
-
+	require '../vendor/autoload.php';
+	// include '../app/QueryBuilders/blogs.php';
+	use App\QueryBuilders\Blog;
 	$blog= new Blog();
 
 	$target_dir = "uploads/";
 	
 	if($_POST){
-		if ($_FILES["photo"]["size"] > 300000) {
-		    echo "  <a href='index.php'>
+		if ($_FILES["photo"]["size"] > 30000) {
+		    echo "  <a href='home.php'>
        		  Go to Home
-   			 </a>	Sorry, your file is too large.";
+   			 </a><br>	Sorry, your file is too large.";
 		  }
 		  else{
 		  		$str=rand(); 
@@ -27,14 +27,14 @@
 	    $blog->user_id=$_POST['user_id'];
 	    if($blog->createBlog()){
 	        echo "
-	         <a href='index.php'>
+	         <a href='home.php'>
        		  Go to Home
    			 </a>	
 	        <div class='alert'>Product was created.</div>";
 	    }
 	    else{
 	    	echo "
-	        <a href='index.php'>
+	        <a href='home.php'>
        		  Go to Home
    			 </a>	
 	        <div class='alert'>Unable to create product.</div>";

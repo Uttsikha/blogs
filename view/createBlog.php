@@ -1,7 +1,7 @@
 
 	<form action="uploadBlog.php" method="post" enctype="multipart/form-data">
 	 
-	   <a href='index.php'> Go to Home </a>
+	   <a href='home.php'> Go to Home </a>
 	    <table>
 	 		<tr>
 	            <td>Blog Name</td>

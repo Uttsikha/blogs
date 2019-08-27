@@ -1,6 +1,10 @@
 <?php
+namespace App\QueryBuilders;
+require '../vendor/autoload.php';
 
-require_once '../app/model.php';
+
+// require_once '../app/Model.php';
+use App\Model;
 
 class Blog extends Model {
 
@@ -51,7 +55,7 @@ class Blog extends Model {
 	    $this->name = $row['name'];
 	    $this->photo = $row['photo'];
 	    $this->description = $row['description'];  
-	    $this->description = $row['posted_date'];  
+	    $this->posted_date= $row['posted_date'];  
 	    $this->user_id = $row['user_id'];  
 	}
 

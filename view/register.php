@@ -1,8 +1,9 @@
 <?php
-
-include '../app/QueryBuilders/users.php';
+require '../vendor/autoload.php';
+// include '../app/QueryBuilders/User.php';
+use App\QueryBuilders\User;
 session_start();
-$user= new User();
+$user= new  User();
 $errors = array();
 
 if (isset($_POST['reg_user'])) {
@@ -13,31 +14,40 @@ if (isset($_POST['reg_user'])) {
     if ($_POST['password_1'] != $_POST['password_2']) {
         array_push($errors, "The two passwords do not match");
     }
-    $user->name=$_POST['username'];
+    $user->username=$_POST['username'];
     $user->email_id=$_POST['email'];
-
-    if ($user->readUser()){
+    $user->password=$_POST['password_1'];
+  
         if (count($errors) == 0) {
-            $password = md5($password_1);
-            $user->password=$password;
-            echo $user->password;
-            if ($user->createUser()){
-                $_SESSION['username'] = $username;
+            $result= $user->checkUser();
+            $number_of_rows = $result->rowCount();
+           if ($number_of_rows==0) {
+                 if ($user->createUser()){
+                 $user->oneUser();
+                $_SESSION['username'] = $user->username;
                 $_SESSION['success'] = "You are now logged in";
-
+                echo "User created You are now logged in";
+                echo "<a href='home.php?id=".$user->id."'>
+                    Go to Home Page
+                  </a>
+                 ";
+               }else{
+                echo "Could not create user";
+            }
             } else{
+                
+                
                 echo "
-                <a href='index.php'>
-                     Go to Home
-                    </a>	
-                <div class='alert'>Unable to create product.</div>";
+                  <a href='signup.php'>
+                       Go Back
+                      </a>
+                      <p>User already exists</p>	";
             }
         } else {
-
-
-        }
-} else{
-    echo "User already exists";
+             for($x = 0; $x < count($errors); $x++) {
+             echo $errors[$x];
+             echo "<br>";
+    }
 
 }
 }

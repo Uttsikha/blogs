@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Database;
+
 	class Connection {
 		protected $conn;
 		protected $config;
@@ -11,7 +13,7 @@
 		public function connect(){
 
 			try {
-				$conn=new PDO ("mysql:host=".$this->config['hostname'].";dbname=".$this->config['db_name'], $this->config['username'],$this->config['password']);
+				$conn=new \PDO ("mysql:host=".$this->config['hostname'].";dbname=".$this->config['db_name'], $this->config['username'],$this->config['password']);
 				return $conn;
 			}catch (PDOException $exception){
 				echo $exception->getMessage();

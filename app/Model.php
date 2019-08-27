@@ -1,6 +1,10 @@
 <?php
 
-	require_once "../database/connection.php";
+namespace App;
+
+use App\Database\Connection;
+
+	// require_once "../database/connection.php";
 
 	class Model {
 		protected $connection;
