@@ -41,7 +41,7 @@ if (isset($_POST['reg_user'])) {
                   <a href='signup.php'>
                        Go Back
                       </a>
-                      <p>User already exists</p>	";
+                      <p>User already exists</p>";
             }
         } else {
              for($x = 0; $x < count($errors); $x++) {

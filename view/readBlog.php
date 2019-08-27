@@ -3,6 +3,7 @@
 require '../vendor/autoload.php';
 // include '../app/QueryBuilders/blogs.php';
  use App\QueryBuilders\Blog;
+ session_start(); 
 $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
 
 $blog = new Blog();

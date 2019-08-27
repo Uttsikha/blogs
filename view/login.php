@@ -2,6 +2,7 @@
 require '../vendor/autoload.php';
 // include '../app/QueryBuilders/User.php';
 use App\QueryBuilders\User;
+session_start();
 $user= new  User();
 
 $errors = array();
@@ -31,10 +32,8 @@ if (isset($_POST['login_user'])) {
   	  $_SESSION['username'] = $username;
       $_SESSION['success'] = "You are now logged in";
       echo"You are now logged in";
-      echo "<br><a href='home.php?id=".$user->id."'>
-      Go to Home Page
-    </a>
-   ";
+      header('location: home.php');
+   
   	}else {
       array_push($errors, "Wrong username/password combination");
       for($x = 0; $x < count($errors); $x++) {

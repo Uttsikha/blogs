@@ -5,11 +5,15 @@ require '../vendor/autoload.php';
 	// include '../app/QueryBuilders/Blog.php';
 	use App\QueryBuilders\Blog;
 	 use App\QueryBuilders\User;
-
-	$id = isset($_GET['id']) ? $_GET['id']:'';
-
+	 session_start(); 
+	if (!isset($_SESSION['username'])) {
+  	$_SESSION['msg'] = "You must log in first";
+  	header('location: index.php');
+  }
+	// $id = isset($_GET['id']) ? $_GET['id']:'';
+	  $username= $_SESSION['username'];
 	 $user = new User();
-	 $user->id=$id;
+	 $user->username=$username;
 	 $user->oneUser();
 
 	 $blog = new Blog();
@@ -23,12 +27,31 @@ require '../vendor/autoload.php';
 	<title>Blogs</title>
 </head>
 <body>
-<?php echo"<a href='profile.php?id=".$user->id."'>My Profile
+<div>
+  	<!-- notification message -->
+  	<?php if (isset($_SESSION['success'])) : ?>
+     
+      	<h3>
+          <?php 
+          	echo $_SESSION['success']; 
+          	unset($_SESSION['success']);
+          ?>
+      	</h3>
+  	<?php endif ?>
+
+    <!-- logged in user information -->
+    <?php  if (isset($_SESSION['username'])) : ?>
+    	<p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
+		<?php endif ?>
+	</div>
+<?php echo"<a href='profile.php'>My Profile
     </a>";
 	?>
 	<div>
-	<?php echo"<a href='createBlog.php?id=".$user->id."'>Create a Blog
-    </a>";
+	<?php	echo "<br><a href='createBlog.php?id=".$user->id."'>
+              Create a blog
+            </a>
+           ";
 	?>
 	</div>
 	 <table border="1">

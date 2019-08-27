@@ -4,10 +4,18 @@ require '../vendor/autoload.php';
 //  include '../app/QueryBuilders/User.php';
 // include '../app/QueryBuilders/Blog.php';
 use App\QueryBuilders\User;
-$id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
+session_start(); 
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['username']);
+    header("location: index.php");
+}
+// $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
 $user = new User();
-$user->id=$id;
+$username= $_SESSION['username'];
+$user->username=$username;
 $user->oneUser();
+
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +25,7 @@ $user->oneUser();
 </head>
 <body>
 <?php
-              echo "<br><a href='home.php?id=".$user->id."'>
+              echo "<br><a href='home.php'>
               Go to Home Page
             </a>
            ";
@@ -51,6 +59,6 @@ $user->oneUser();
 		 ?>
          </tr>
 	</table> 
-    <a href="">Logout</a>
+    <a href="profile.php?logout=1">Logout</a>
     </body>
     </html>
