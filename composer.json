@@ -1,7 +1,13 @@
 {
     "autoload": {
+<<<<<<< HEAD
         "psr-4": {
             "App\\": "app/"
         }
+=======
+        "classmap": [
+            
+        ]
+>>>>>>> 07b32ba79f0e402798cbfb9c72f052cddfa064f7
     }
 }

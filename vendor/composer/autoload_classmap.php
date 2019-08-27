@@ -6,4 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+<<<<<<< HEAD
+=======
+    'Blog' => $baseDir . '/app/QueryBuilders/blogs.php',
+    'Model' => $baseDir . '/app/model.php',
+    'User' => $baseDir . '/app/QueryBuilders/users.php',
+>>>>>>> 07b32ba79f0e402798cbfb9c72f052cddfa064f7
 );

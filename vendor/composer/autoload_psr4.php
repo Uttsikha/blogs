@@ -6,5 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+<<<<<<< HEAD
     'App\\' => array($baseDir . '/app'),
+=======
+>>>>>>> 07b32ba79f0e402798cbfb9c72f052cddfa064f7
 );
