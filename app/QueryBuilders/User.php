@@ -22,10 +22,12 @@ class User extends Model {
 
 	function readUser()
 	{
-	    $statement = $this->connection->prepare('SELECT * FROM users WHERE username =:username OR password =:password');
+	    $statement = $this->connection->prepare('SELECT * FROM users WHERE username =:username AND password =:password LIMIT 1');
 	    $statement->bindParam(":username", $this->username);
-	     $statement->bindParam(":password", $this->password);
-		$result = $statement->execute();
+	    $statement->bindParam(":password", $this->password);
+		$statement->execute();
+		$row = $statement->fetch(\PDO::FETCH_ASSOC);
+		$this->id = $row['id'];
 		return $statement;
 		
 	}
@@ -51,11 +53,11 @@ class User extends Model {
 	
 	public function oneUser()
 	{
-		$statement = $this->connection->prepare('SELECT * FROM users WHERE username=:username LIMIT 0,1 ');
-		$statement->bindParam(":username", $this->username);
+		$statement = $this->connection->prepare('SELECT * FROM users WHERE id=:id LIMIT 0,1 ');
+		$statement->bindParam(":id", $this->id);
 	    $statement->execute();
 	 
-	    $row = $statement->fetch(PDO::FETCH_ASSOC);
+	    $row = $statement->fetch(\PDO::FETCH_ASSOC);
 	    $this->id = $row['id'];
 	    $this->username = $row['username'];
 	    $this->password = $row['password'];

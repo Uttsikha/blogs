@@ -23,15 +23,18 @@ if (isset($_POST['login_user'])) {
    
     $user->username=$username; 
     $user->password=$password; 
-    $result=$user->readUser();
-   $number_of_rows = $result->rowCount();
-    echo $number_of_rows;
+    $statement=$user->readUser();
+   $number_of_rows = $statement->rowCount();
+
  	if ($number_of_rows==1) {
-      echo "Okay";
+    
   	  $_SESSION['username'] = $username;
       $_SESSION['success'] = "You are now logged in";
       echo"You are now logged in";
-  	  header('location: home.php');
+      echo "<br><a href='home.php?id=".$user->id."'>
+      Go to Home Page
+    </a>
+   ";
   	}else {
       array_push($errors, "Wrong username/password combination");
       for($x = 0; $x < count($errors); $x++) {

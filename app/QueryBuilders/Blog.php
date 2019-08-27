@@ -23,7 +23,7 @@ class Blog extends Model {
 
 	public function allBlogs()
 	{
-		$statement = $this->connection->prepare('SELECT * FROM blogs ORDER BY name ASC');
+		$statement = $this->connection->prepare('SELECT * FROM blogs ORDER BY user_id ASC');
 		$statement->execute();
 
 		$result = $statement->fetchAll();
@@ -49,7 +49,7 @@ class Blog extends Model {
 	    $statetment->bindParam(1, $this->id);
 	    $statetment->execute();
 	 
-	    $row = $statetment->fetch(PDO::FETCH_ASSOC);
+	    $row = $statetment->fetch(\PDO::FETCH_ASSOC);
 	 
 	    $this->id = $row['id'];
 	    $this->name = $row['name'];

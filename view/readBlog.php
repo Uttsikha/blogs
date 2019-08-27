@@ -9,9 +9,9 @@ $blog = new Blog();
 $blog->id=$id;
 
  $blog->readBlog();
-   $imageURL = $blog->photo;
+   $imageURL = 'uploads/'.$blog->photo;
       echo "<div>";
-    echo "<a href='index.php'>";
+    echo "<a href='home.php'>";
         echo " Go to Home";
     echo "</a>";
 echo "</div>";	
@@ -29,7 +29,12 @@ echo "<table class='table' border=1>";
  
     echo "<tr>";
         echo "<td>Photo</td>";
-        echo "<td><img src= 'uploads/{$blog->photo}' width='100' height='100'/></td>";
+        if (file_exists($imageURL)){
+            echo "<td><img src= 'uploads/{$blog->photo}' width='100' height='100'/></td>";
+        }else{
+            echo '<td>No picture on display</td>';
+    }
+       
     echo "</tr>";
       echo "<tr>";
         echo "<td>Posted Date</td>";

@@ -5,10 +5,12 @@ require '../vendor/autoload.php';
 	// include '../app/QueryBuilders/Blog.php';
 	use App\QueryBuilders\Blog;
 	 use App\QueryBuilders\User;
-	// $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
+
+	$id = isset($_GET['id']) ? $_GET['id']:'';
 
 	 $user = new User();
-	 $users = $user->allUsers();
+	 $user->id=$id;
+	 $user->oneUser();
 
 	 $blog = new Blog();
 	 $blogs = $blog->allBlogs();
@@ -21,31 +23,14 @@ require '../vendor/autoload.php';
 	<title>Blogs</title>
 </head>
 <body>
-	 <table border="1">
-		<caption>Users Detail</caption>
-		<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Email ID</th>
-			<th>Password</th>
-			<th>Joined Date</th>
-			
-		</tr>
-		<?php
-		foreach($users as $user) {
-			echo "<tr>";
-	
-				echo "<td> $user[id]</td>";
-				echo "<td> $user[username]</td>";
-				echo "<td> $user[email_id]</td>";
-				echo "<td> $user[password]</td>";
-				echo "<td> $user[joined_date]</td>";
-					
-		
-			echo "</tr>";
-		} ?>
-	</table> 
-	<div><a href="createBlog.php">Create a Blog</a></div>
+<?php echo"<a href='profile.php?id=".$user->id."'>My Profile
+    </a>";
+	?>
+	<div>
+	<?php echo"<a href='createBlog.php?id=".$user->id."'>Create a Blog
+    </a>";
+	?>
+	</div>
 	 <table border="1">
 		<caption>Blogs Detail</caption>
 		<tr>
@@ -55,7 +40,7 @@ require '../vendor/autoload.php';
 			<th>Picture</th>
 			<th>Posted Date</th>
 			<th>User ID</th>
-			<th>Actions</th>
+			<th colspan="3">Actions</th>
 		</tr>
 	
 			<?php
@@ -67,23 +52,36 @@ require '../vendor/autoload.php';
 				if (file_exists($imageURL)){
 					echo '<td><img src="'.$imageURL.'"width="100" height="100"/></td>';
 				}else{
-					echo '<td></td>';
+					echo '<td>No picture on display</td>';
 			}
 				echo "<td> $blog[posted_date]</td>";
 				echo "<td> $blog[user_id]</td>";
+				if ($user->id==$blog[user_id]){
 				  echo "<td>";
 					     echo "<a href='readBlog.php?id={$blog['id']}'>
 					      Read
 					 </a>
+					 </td>
+					 ";
 					 
-					 <a href='updateBlog.php?id={$blog['id']}'>
-					     Edit
-					 </a>
-					 
-					 <a href='deleteBlog.php?id={$blog['id']}'>
+					// 
+					// <td><a href='updateBlog.php?id={$blog['id']}'>
+					//      Edit
+					//  </a>
+					//  </td>
+					echo" <td> <a href='deleteBlog.php?id={$blog['id']}'>
 					      Delete
-					 </a>";
-                 echo "</td></tr>";
+					 </a>
+					 </td>";
+			}else {
+				echo "<td colspan='3'>";
+				echo "<a href='readBlog.php?id={$blog['id']}'>
+				 Read
+			</a>
+			</td>
+			";
+			}
+                 echo "</tr>";
 			}
 			?>
 		

@@ -2,6 +2,8 @@
 	require '../vendor/autoload.php';
 	// include '../app/QueryBuilders/blogs.php';
 	use App\QueryBuilders\Blog;
+	$id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
+
 	$blog= new Blog();
 
 	$target_dir = "uploads/";
@@ -24,19 +26,21 @@
 		$blog->photo = $fileName;
 
 	
-	    $blog->user_id=$_POST['user_id'];
+		$blog->user_id=$id;
+		
 	    if($blog->createBlog()){
 	        echo "
-	         <a href='home.php'>
-       		  Go to Home
-   			 </a>	
+		<br><a href='home.php?id=".$id."'>
+			Go to Home Page
+		  </a>
+		
 	        <div class='alert'>Product was created.</div>";
 	    }
 	    else{
 	    	echo "
-	        <a href='home.php'>
-       		  Go to Home
-   			 </a>	
+	        <br><a href='home.php?id=".$id."'>
+			Go to Home Page
+		  </a>
 	        <div class='alert'>Unable to create product.</div>";
 	    }
 }}
