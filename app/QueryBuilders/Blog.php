@@ -2,8 +2,6 @@
 namespace App\QueryBuilders;
 require '../vendor/autoload.php';
 
-
-// require_once '../app/Model.php';
 use App\Model;
 
 class Blog extends Model {
@@ -48,8 +46,8 @@ class Blog extends Model {
 	    $statetment = $this->connection->prepare('SELECT * FROM blogs WHERE id = ? LIMIT 0,1 ');
 	    $statetment->bindParam(1, $this->id);
 	    $statetment->execute();
-	 
-	    $row = $statetment->fetch(\PDO::FETCH_ASSOC);
+	   
+		$row = $statetment->fetch(\PDO::FETCH_ASSOC);
 	 
 	    $this->id = $row['id'];
 	    $this->name = $row['name'];
@@ -60,11 +58,8 @@ class Blog extends Model {
 	}
 
 	 function createBlog(){
- 
 	    $statement = $this->connection->prepare('INSERT INTO blogs
 	    	SET name=:name, photo=:photo, description=:description, user_id=:user_id');
-	  
-      
         $this->name=htmlspecialchars(strip_tags($this->name));
         $this->photo=htmlspecialchars(strip_tags($this->photo));
         $this->description=htmlspecialchars(strip_tags($this->description));
@@ -75,13 +70,11 @@ class Blog extends Model {
         $statement->bindParam(":description", $this->description);
         $statement->bindParam(":user_id", $this->user_id);
        
-     if($statement->execute()){
+   	  	if($statement->execute()){
             return true;
         }else{
             return false;
         }
  
     }
-
-
 }

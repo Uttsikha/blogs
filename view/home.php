@@ -5,6 +5,7 @@ require '../vendor/autoload.php';
 	// include '../app/QueryBuilders/Blog.php';
 	use App\QueryBuilders\Blog;
 	 use App\QueryBuilders\User;
+	 use Str\Str;
 	 session_start(); 
 	if (!isset($_SESSION['username'])) {
   	$_SESSION['msg'] = "You must log in first";
@@ -25,9 +26,15 @@ require '../vendor/autoload.php';
 <html>
 <head>
 	<title>Blogs</title>
+	<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css">
 </head>
-<body>
+<body class="container">
 <div>
+<br>
+
   	<!-- notification message -->
   	<?php if (isset($_SESSION['success'])) : ?>
      
@@ -41,21 +48,22 @@ require '../vendor/autoload.php';
 
     <!-- logged in user information -->
     <?php  if (isset($_SESSION['username'])) : ?>
-    	<p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
+    	<p class='text-center text-primary '><strong>Welcome <?php echo $_SESSION['username']; ?></strong></p>
 		<?php endif ?>
-	</div>
-<?php echo"<a href='profile.php'>My Profile
-    </a>";
-	?>
-	<div>
-	<?php	echo "<br><a href='createBlog.php?id=".$user->id."'>
+		<a href='profile.php' class="btn btn-success">My Profile </a>
+		<br>
+		<br>
+	<?php	echo "<a href='createBlog.php?id=".$user->id."' class='btn btn-success'>";?>
               Create a blog
-            </a>
-           ";
-	?>
+     </a>
+	 <br>
+	 <br>
+
 	</div>
-	 <table border="1">
-		<caption>Blogs Detail</caption>
+	<div class="container">
+	 <table border="1" class="table table-dark table-bordered ">
+		<caption class='text-center text-primary'>Blogs Detail</caption>
+		<thead class="thead-light">
 		<tr>
 			<th>ID</th>
 			<th>Name</th>
@@ -63,52 +71,56 @@ require '../vendor/autoload.php';
 			<th>Picture</th>
 			<th>Posted Date</th>
 			<th>User ID</th>
-			<th colspan="3">Actions</th>
+			<th>Actions</th>
 		</tr>
-	
+		</thead>
 			<?php
 			foreach($blogs as $blog) {
-				  $imageURL = 'uploads/'.$blog["photo"];
+				$name = new Str($blog[name]);
+				$name->toTitleCase();
+				$name->padBoth(10, ' ');
+				$description = new Str($blog[description]);
+				$description->upperCaseFirst();
+				$imageURL = '../uploads/'.$blog["photo"];
 				echo "	<tr><td> $blog[id]</td>";
-				echo "<td> $blog[name]</td>";
-				echo "<td> $blog[description]</td>";
+				echo "<td>". $name."</td>";
+				echo "<td> ".$description."</td>";
 				if (file_exists($imageURL)){
-					echo '<td><img src="'.$imageURL.'"width="100" height="100"/></td>';
+					echo '<td><img src="'.$imageURL.'"class="img-fluid mx-auto"/></td>';
 				}else{
 					echo '<td>No picture on display</td>';
 			}
 				echo "<td> $blog[posted_date]</td>";
 				echo "<td> $blog[user_id]</td>";
 				if ($user->id==$blog[user_id]){
-				  echo "<td>";
-					     echo "<a href='readBlog.php?id={$blog['id']}'>
-					      Read
-					 </a>
+				  echo "<td>
+				  <ul class='nav flex-column'>
+			
+				
+				 <li class='nav-item'> <a href='readBlog.php?id={$blog['id']}' class=' nav-link text-success'> Read </a></li>
+				<li class='nav-item'>	<a href='deleteBlog.php?id={$blog['id']}' class='nav-link text-success'> Delete </a></li>
+					
+					 </ul>
 					 </td>
 					 ";
-					 
-					// 
-					// <td><a href='updateBlog.php?id={$blog['id']}'>
-					//      Edit
-					//  </a>
-					//  </td>
-					echo" <td> <a href='deleteBlog.php?id={$blog['id']}'>
-					      Delete
-					 </a>
-					 </td>";
 			}else {
-				echo "<td colspan='3'>";
-				echo "<a href='readBlog.php?id={$blog['id']}'>
-				 Read
-			</a>
+		
+				echo "<td>
+				<ul class='nav flex-column'>
+					<a href='readBlog.php?id={$blog['id']}' class='nav-link text-success'> Read </a>
+				</ul>
 			</td>
+			
 			";
 			}
-                 echo "</tr>";
-			}
-			?>
+				//	 echo (string)$str->collapseWhitespace();
+		}
+				 echo "</tr>";
+				
+					?>
 		
 	</table> 
+</div>
 </body>
 </html>
 

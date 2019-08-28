@@ -3,30 +3,26 @@
 <html>
 <head>
   <title>Login</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css">
 </head>
-<body>
+<body class="container">
   <div class="header">
-  	<h2>Login</h2>
+  <br>
+  	<p class="center h2 text-primary">Login</p>
   </div>
-	 
   <form method="post" action="login.php">
-  <table>
- 
-  	<tr>
-  		<td><label>Username</label></td>
-  		<td><input type="text" name="username" ></td>
-  	</tr>
-  	<tr>
-      <td><label>Password</label></td>
-      <td><input type="password" name="password"></td>
-  	</tr>
-  	<tr>
-  		<td><button type="submit" class="btn" name="login_user">Login</button></td>
-  	</tr>
-      </table>
+  <div class="form-group row">
+  	<div class="col-md-2"><label>Username</label></div>
+	  <div class="col-md-6"><input type="text" name="username" class="form-control" ></div>
+	  </div>
+	 <div class="form-group row">
+		  <div class="col-md-2"><label>Password</label></div>
+		  <div class="col-md-6"><input type="password" name="password" class="form-control "></div>
+	</div>
+  	<button type="submit" name="login_user" class=" btn btn-success">Login</button>
+  
   	<p>
-  		Not yet a member? <a href="signup.php">Sign up</a>
+  		Not yet a member? <a href="signup.php" class="text-success">Sign up</a>
   	</p>
   </form>
 </body>

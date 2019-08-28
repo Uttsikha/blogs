@@ -1,37 +1,40 @@
 <html>
 <head>
   <title>Registration</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css">
 </head>
-<body>
-  <tr class="header">
-  	<h2>Register</h2>
-  </tr>
-	
+<body> 
+</head>
+<body class="container">
+	<br>
+	<p class="center h2 text-primary">Register</p>
+ 
+  
   <form method="post" action="register.php">
-  <table>
-  	<tr>
-  	 <td> <label>Username</label></td>
-	   <td> <input type="text" name="username" value=""></td>
-  	</tr>
-  	<tr>
-	  <td> <label>Email</label></td>
-	  <td> <input type="email" name="email" value=""></td>
-  	</tr>
-  	<tr>
-	  <td> <label>Password</label></td>
-	  <td><input type="password" name="password_1"></td>
-  	</tr>
-  	<tr>
-	  <td> <label>Confirm password</label></td>
-	  <td><input type="password" name="password_2"></td>
-  	</tr>
-  	<tr>
-  	 <td> <button type="submit" class="btn" name="reg_user">Register</button></td>
-  	</tr>
-	  </table>
+  	<div class="form-group">
+  	 	 <label>Username</label>
+	    <input type="text" name="username" value="" class="form-control">
+	</div>
+   	<div class="form-group">
+	   <label>Email</label>
+	   <input type="email" name="email" value="" class="form-control">
+	</div>
+	<div class="form-group">
+	   <label>Password</label>
+	  <input type="password" name="password_1" class="form-control">
+	</div>
+	<div class="form-group">
+	   <label>Confirm password</label>
+	  <input type="password" name="password_2" class="form-control">
+	  </div>
+  
+  	 <button type="submit"  name="reg_user" class=" btn btn-success">Register</button>
+  	
   	<p>
-  		Already a member? <a href="index.php">Sign in</a>
+  		Already a member? <a href="index.php" class="text-success">Sign in</a>
   	</p>
   </form>
 </body>

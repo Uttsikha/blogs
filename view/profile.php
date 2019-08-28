@@ -22,43 +22,46 @@ $user->oneUser();
 <html>
 <head>
 	<title>Blogs</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css">
+
 </head>
-<body>
-<?php
-              echo "<br><a href='home.php'>
-              Go to Home Page
-            </a>
-           ";
-?>
-	 <table border="1">
-		<caption>My Detail</caption>
-		<tr>
+<body class="container">
+<div class="container-fluid justify-content-left">
+<br>
+       <a class="text-success h4"href='home.php'> Go to Home Page</a>
+   </div>
+   <br>
+    <div class="container-fluid ">
+	 <table class="table-sm table-striped table-hover">
+		<caption class="text-center">My Detail</caption>
+		<tr class="table-primary">
 			<td>ID</td>
 		    <?php 	echo "<td> $user->id</td>";?>	
 			
 			
 		</tr>
-        <tr>
+        <tr class="table-secondary">
             <td>Name</td>
             <?php 	echo "<td> $user->username</td>";?>
         </tr>
 
-        <tr>
+        <tr  class="table-success"> 
            <td>Email ID</td>
            <?php 	echo "<td> $user->email_id</td>";?>
         </tr>
 
-        <tr>
+        <tr  class="table-danger">
         <td>Password</td>
         <?php 	echo "<td> $user->password</td>";?>
         </tr>
 		
-		<tr>
+		<tr  class="table-warning">
              <td>Joined Date</td>
 		    <?php	echo "<td> $user->joined_date</td>";
 		 ?>
          </tr>
 	</table> 
-    <a href="profile.php?logout=1">Logout</a>
+    <br>
+    <a class="btn btn-lg btn-success h4" href="profile.php?logout=1">Logout</a>
     </body>
     </html>

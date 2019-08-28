@@ -1,7 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Blogs</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css">
+
+</head>
+<body class="container">
 <?php
 require '../vendor/autoload.php';
 // include '../app/QueryBuilders/User.php';
 use App\QueryBuilders\User;
+
+
 session_start();
 $user= new  User();
 
@@ -35,19 +45,27 @@ if (isset($_POST['login_user'])) {
       header('location: home.php');
    
   	}else {
+      echo "<br>";
       array_push($errors, "Wrong username/password combination");
       for($x = 0; $x < count($errors); $x++) {
-        echo $errors[$x];
-        echo "<br>";
+        echo "<p class='text-primary'>".$errors[$x]."</p>";
+     
    }
+   echo "<a href='index.php' class='btn btn-success'>
+   Go Back
+  </a><br>";
   	}
   }else{
+    echo "<br>";
     for($x = 0; $x < count($errors); $x++) {
-      echo $errors[$x];
-      echo "<br>";
+      echo "<p class='text-primary'>".$errors[$x]."</p>";
   }
-   
+   echo "<a href='index.php' class='btn btn-success'>
+   Go Back
+  </a><br>";
   }
 }
 
 ?>
+</body>
+</html>
